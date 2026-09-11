@@ -29,11 +29,7 @@ Spectrum, ConnectX, SONiC, Cumulus Linux, RDMA, RoCE v2, GPUDirect RDMA (studied
 ## Scripts
 
 - `vlan_config.sh` — VLAN/LACP/jumbo frame provisioning
-- `network_audit.py` — SSH-based health audit (CRC errors, link status, MTU) exporting metrics to Prometheus/Grafana
 
-## Topology
-
-See [topology.svg](./topology.svg) for the lab diagram.
 ## Topology
 
 
