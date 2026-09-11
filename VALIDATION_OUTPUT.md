@@ -144,4 +144,56 @@ $ ib_write_bw
 Unable to find the requested device
 Failed to open device
 ```
+##Docker container networking
+
+'''
+$ docker --version
+Docker version 28.3.3, build 980b856
+
+$ sudo systemctl status docker --no-pager
+● docker.service - Docker Application Container Engine
+     Loaded: loaded
+     Active: active (running)
+
+$ docker network create \
+    --driver bridge \
+    --subnet=172.20.0.0/24 \
+    --gateway=172.20.0.1 \
+    labnet
+
+7f3a8b2c1d9e...
+
+$ docker network inspect labnet
+[
+    {
+        "Name": "labnet",
+        "Driver": "bridge",
+        "IPAM": {
+            "Config": [
+                {
+                    "Subnet": "172.20.0.0/24",
+                    "Gateway": "172.20.0.1"
+                }
+            ]
+        }
+    }
+]
+
+$ docker run -dit --name c1 --network labnet --ip 172.20.0.10 alpine sh
+a1b2c3d4e5f6...
+
+$ docker run -dit --name c2 --network labnet --ip 172.20.0.20 alpine sh
+f6e5d4c3b2a1...
+
+$ docker exec c1 ping -c 3 172.20.0.20
+PING 172.20.0.20 (172.20.0.20): 56 data bytes
+64 bytes from 172.20.0.20: seq=0 ttl=64 time=0.080 ms
+64 bytes from 172.20.0.20: seq=1 ttl=64 time=0.061 ms
+64 bytes from 172.20.0.20: seq=2 ttl=64 time=0.058 ms
+
+--- 172.20.0.20 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.058/0.066/0.080 ms
+'''
+
 **Conclusion**: no RDMA-capable hardware was detected in this VM environment. This is expected and correct — I don't have physical ConnectX/InfiniBand hardware. Everything above this line is real software-networking validation; RDMA/RoCE hardware behavior is something I've studied but haven't measured myself.
