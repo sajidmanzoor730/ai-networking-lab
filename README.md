@@ -34,3 +34,8 @@ Spectrum, ConnectX, SONiC, Cumulus Linux, RDMA, RoCE v2, GPUDirect RDMA (studied
 ## Topology
 
 See [topology.svg](./topology.svg) for the lab diagram.
+## Topology
+
+
+
+![topology](./topology.svg)
