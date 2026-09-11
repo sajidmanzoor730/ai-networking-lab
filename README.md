@@ -29,6 +29,14 @@ Spectrum, ConnectX, SONiC, Cumulus Linux, RDMA, RoCE v2, GPUDirect RDMA (studied
 ## Scripts
 
 - `vlan_config.sh` — VLAN/LACP/jumbo frame provisioning
+Docker (basic container networking)
+Docker installed and verified on both VMs. Two containers created on an isolated bridge network and tested for connectivity — this is a basic container networking demo, not yet integrated with the bond0/VLAN 100 fabric used elsewhere in this lab.
+Docker 28.3.3 installed and running on both VMs
+Custom bridge network created (labnet, 172.20.0.0/24)
+Two Alpine containers (c1, c2) attached to it with static IPs
+Verified container-to-container connectivity with ping (0% packet loss)
+See VALIDATION_OUTPUT.md for the real output.
+Note: this uses Docker's default bridge driver, which is isolated from the host's VLAN/bond interfaces. A more complete integration (e.g. via a macvlan network attached to bond0.100) would put containers directly on the same fabric as the VMs — that's a natural next step but hasn't been done here yet.
 
 ## Topology
 
